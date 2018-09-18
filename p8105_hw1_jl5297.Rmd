@@ -24,7 +24,7 @@ Create a data frame comprised of:
 *   A (length-10) character vector
 *   A (length-10) factor vector
 
-```{r dataset}
+```{r p1_dataset}
 set.seed(1)
 problem1_df = tibble(
     vector_numeric = runif(10, 0, 5),
@@ -44,7 +44,7 @@ mean(problem1_df$vector_logical)
 mean(problem1_df$vector_character)
 mean(problem1_df$vector_factor)
 ```
-It shows that only numeric and logical variables work. In factor and character, NA is returned. Because taking the mean only can apply to numbers. And logical variable can be interptred in number, false as 0 and true as 1.
+It shows that only numeric and logical variables work. In factor and character, NA is returned. Because taking the mean only can apply to numbers. And a logical variable can be interptred into number, false as 0 and true as 1.
      
 ### 3. Convert variables 
 Convert other variables into numeric
@@ -59,17 +59,62 @@ Factor: Factors convert into integers according to their levels.
 As for character, character variables containing only a number can be converted into numeric.  
      
          
-Convert character variable from character to factor to numeric. Convert factor variable from factor to character to numeric
+Convert character variable from character to factor to numeric. Convert factor variable from factor to character to numeric.
 ```{r convert2}
 as.numeric(as.factor(problem1_df$vector_character))
 as.numeric(as.character(problem1_df$vector_factor))
 ```
 When converting character variable from character to factor to numeric, it can be turned into a integer. When converting factor variable from factor to character to numeric, NA introduced by coercion.
         
-        
+## Problem 2
+### 1. Create a dataframe
+Create a data frame comprised of:
+    
+* x: a random sample of size 1000 from a standard Normal distribution
+* y: a random sample of size 1000 from a standard Normal distribution
+* A logical vector indicating whether the x + y > 0
+* A numeric vector created by coercing the above logical vector
+* A factor vector created by coercing the above logical vector  
+
+```{r p2_dataset}
+# I have set the seed in chunk p1_dataset
+problem2_df = tibble(
+    x = rnorm(1000),
+    y = rnorm(1000),
+    xy_logical = x + y > 0,
+    xy_numeric = as.numeric(xy_logical),
+    xy_factor = as.factor(xy_logical)
+)
+```
+
+* The dataset has  `r ncol(problem2_df)` columns and `r nrow(problem2_df)` rows.
+* The mean of x is `r mean(problem2_df$x)` and median of x is `r median(problem2_df$x)`.
+* The proportion of cases for which the logical vector is TRUE is `r mean(problem2_df$xy_logical)`.
+
+### 2. Make scatterplots
+Make a scatterplot y vs x; color points using the logical variable.
+```{r plot1, message = FALSE}
+ggplot(problem2_df, aes(x = x, y = y, color = xy_logical)) + geom_point() +
+    scale_color_discrete(name = "x+y>0")
+ggsave("plot1.png")
+```
+There are only two colors, red and blue, corresponding to two logical variables. And red points and blue points are separated by the line of y = -x.
+
+Make a scatterplot y vs x; color points using the numeric variable.
+```{r plot2, message = FALSE}
+ggplot(problem2_df, aes(x = x, y = y, color = xy_numeric)) + geom_point() + 
+    scale_color_continuous(name = "x+y>0")
+ggsave("plot2.png")
+```
+The color scale varies between light blue to dark blue. And dark blue points and light blue points are separated by the line of y = -x.
+
+Make a scatterplot y vs x; color points using the factor variable.
+```{r plot3, message = FALSE}
+ggplot(problem2_df, aes(x = x, y = y, color = xy_factor)) + geom_point() + 
+    scale_color_discrete(name = "x+y>0")
+ggsave("plot3.png")
+```
+There are only two colors, red and blue, corresponding to two factor variables. And red points and blue points are separated by the line of y = -x.
 
 
-
-
- 
 

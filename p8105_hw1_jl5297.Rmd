@@ -95,7 +95,7 @@ problem2_df = tibble(
 Make a scatterplot y vs x; color points using the logical variable.
 ```{r plot1, message = FALSE}
 ggplot(problem2_df, aes(x = x, y = y, color = xy_logical)) + geom_point() +
-    scale_color_discrete(name = "x+y>0")
+    scale_color_discrete(name = "x+y>0 Logical")
 ggsave("plot1.png")
 ```
 There are only two colors, red and blue, corresponding to two logical variables. And red points and blue points are separated by the line of y = -x.
@@ -103,7 +103,7 @@ There are only two colors, red and blue, corresponding to two logical variables.
 Make a scatterplot y vs x; color points using the numeric variable.
 ```{r plot2, message = FALSE}
 ggplot(problem2_df, aes(x = x, y = y, color = xy_numeric)) + geom_point() + 
-    scale_color_continuous(name = "x+y>0")
+    scale_color_continuous(name = "x+y>0 Numeric")
 ggsave("plot2.png")
 ```
 The color scale varies between light blue to dark blue. And dark blue points and light blue points are separated by the line of y = -x.
@@ -111,7 +111,7 @@ The color scale varies between light blue to dark blue. And dark blue points and
 Make a scatterplot y vs x; color points using the factor variable.
 ```{r plot3, message = FALSE}
 ggplot(problem2_df, aes(x = x, y = y, color = xy_factor)) + geom_point() + 
-    scale_color_discrete(name = "x+y>0")
+    scale_color_discrete(name = "x+y>0 Factor")
 ggsave("plot3.png")
 ```
 There are only two colors, red and blue, corresponding to two factor variables. And red points and blue points are separated by the line of y = -x.

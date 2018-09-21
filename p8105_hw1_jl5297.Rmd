@@ -10,7 +10,6 @@ This my first-week homework for Data Science, including my solutions to Problems
 ## Load Packages
 ```{r, message = FALSE, warning = FALSE}
 library(tidyverse)
-library(ggplot2)
 ```
 
 
@@ -47,8 +46,8 @@ mean(problem1_df$vector_factor)
 It shows that only numeric and logical variables work. In factor and character, NA is returned. Because taking the mean only can apply to numbers. And a logical variable can be interptred into number, false as 0 and true as 1.
      
 ### 3. Convert variables 
-Convert other variables into numeric
-```{r convert1, eval = FALSE}
+Convert other variables into numeric.
+```{r convert1, results = 'hide', warning = FALSE}
 as.numeric(problem1_df$vector_logical)
 as.numeric(problem1_df$vector_character)
 as.numeric(problem1_df$vector_factor)
